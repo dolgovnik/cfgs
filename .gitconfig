@@ -1,0 +1,12 @@
+[user]
+name = Nikolay Dolgov
+email = dolgovnik@gmail.com
+[core]
+editor = vim
+[alias]
+ad = add
+co = checkout
+br = branch
+ci = commit
+cim = commit -m
+st = status
