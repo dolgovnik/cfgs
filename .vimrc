@@ -99,7 +99,6 @@ nnoremap <C-f> :NERDTreeFind<CR>
 "put neede font from https://github.com/ryanoasis/nerd-fonts to
 "~/.local/share/fonts
 
-
 "airline
 "git clone https://github.com/vim-airline/vim-airline ~/.vim/bundle/vim-airline
 "git clone https://github.com/vim-airline/vim-airline-themes ~/.vim/bundle/vim-airline-themes
@@ -110,6 +109,11 @@ let g:airline#extensions#tabline#formatter = 'default'
 
 "fugitive
 "git clone https://tpope.io/vim/fugitive.git ~/.vim/bundle/fugitive
+
+"flake8
+"pip install flake8
+"git clone https://github.com/nvie/vim-flake8.git .vim/bundle/vim-flake8
+autocmd FileType python map <buffer> <leader>f :call flake8#Flake8()<CR>
 
 
 "gVIM
