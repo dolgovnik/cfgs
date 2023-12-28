@@ -102,6 +102,7 @@ nnoremap <C-f> :NERDTreeFind<CR>
 "airline
 "git clone https://github.com/vim-airline/vim-airline ~/.vim/bundle/vim-airline
 "git clone https://github.com/vim-airline/vim-airline-themes ~/.vim/bundle/vim-airline-themes
+"sudo apt-get install fonts-powerline
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
