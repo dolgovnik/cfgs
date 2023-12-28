@@ -90,13 +90,14 @@ nnoremap <leader>n :NERDTreeFocus<CR>
 nnoremap <C-n> :NERDTree<CR>
 nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
+set ambiwidth=double  "to not slice dev_icons in nerdtee
 
 "vim-nerdtree-syntax-highlight
 "git clone https://github.com/tiagofumo/vim-nerdtree-syntax-highlight ~/.vim/bundle/vim-nerdtree-syntax-highlight
 
 "dev-icons
 "git clone https://github.com/ryanoasis/vim-devicons ~/.vim/bundle/vim-devicons
-"put neede font from https://github.com/ryanoasis/nerd-fonts to
+"put needed font (All Ubuntu Fonts) from https://github.com/ryanoasis/nerd-fonts to
 "~/.local/share/fonts
 
 "airline
@@ -119,17 +120,18 @@ autocmd FileType python map <buffer> <leader>f :call flake8#Flake8()<CR>
 
 "gVIM
 "COLORSCHEME, FONTS
+"git clone https://github.com/altercation/vim-colors-solarized.git ~/.vim/bundle/vim-colors-solarized
 if has('gui_running')
     "colorsheme
     colorscheme solarized
-    set background=light
+    set background=dark
     let g:solarized_contrast="high" | colorscheme solarized
     let g:solarized_visibility="high" | colorscheme solarized
     let g:solarized_diffmode="high" | colorscheme solarized
     nnoremap sbd :set background=dark<CR>
     nnoremap sbl :set background=light<CR>
     if has("gui_gtk3")
-      set guifont=Inconsolata\ 14
+      set guifont=Inconsolata\ 10
     elseif has("gui_win32")
       set guifont=Consolas:h11
     "elseif has("gui_macvim")
