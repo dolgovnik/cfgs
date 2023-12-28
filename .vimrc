@@ -91,18 +91,19 @@ nnoremap <C-n> :NERDTree<CR>
 nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
 
+"vim-nerdtree-syntax-highlight
+"git clone https://github.com/tiagofumo/vim-nerdtree-syntax-highlight ~/.vim/bundle/vim-nerdtree-syntax-highlight
+
 "dev-icons
 "git clone https://github.com/ryanoasis/vim-devicons ~/.vim/bundle/vim-devicons
 "put neede font from https://github.com/ryanoasis/nerd-fonts to
 "~/.local/share/fonts
 
-"vim-nerdtree-syntax-highlight
-"git clone https://github.com/tiagofumo/vim-nerdtree-syntax-highlight ~/.vim/bundle/vim-nerdtree-syntax-highlight
-
 
 "airline
 "git clone https://github.com/vim-airline/vim-airline ~/.vim/bundle/vim-airline
 "git clone https://github.com/vim-airline/vim-airline-themes ~/.vim/bundle/vim-airline-themes
+let g:airline_powerline_fonts = 1
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'default'
