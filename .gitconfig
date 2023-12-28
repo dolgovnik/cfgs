@@ -10,3 +10,8 @@ br = branch
 ci = commit
 cim = commit -m
 st = status
+[merge]
+tool = vimdiff
+conflictstyle = diff3
+prompt = false
+
