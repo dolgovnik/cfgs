@@ -12,6 +12,7 @@ set history=50                 "keep 50 lines of command line history
 set showcmd                    "show command in bottom bar
 set wildmenu                   "visual autocomplete for command menu
 set lazyredraw                 "redraw only when we need to.
+set autochdir                  "auto change workdir to current opened file
 filetype on
 filetype plugin on
 set bs=indent,eol,start        "allow backspacing over everything in insert mode
