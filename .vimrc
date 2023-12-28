@@ -90,7 +90,7 @@ nnoremap <leader>n :NERDTreeFocus<CR>
 nnoremap <C-n> :NERDTree<CR>
 nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
-set ambiwidth=double  "to not slice dev_icons in nerdtee
+" set ambiwidth=double  "to not slice dev_icons in nerdtee
 
 "vim-nerdtree-syntax-highlight
 "git clone https://github.com/tiagofumo/vim-nerdtree-syntax-highlight ~/.vim/bundle/vim-nerdtree-syntax-highlight
@@ -112,11 +112,41 @@ let g:airline#extensions#tabline#formatter = 'default'
 "fugitive
 "git clone https://tpope.io/vim/fugitive.git ~/.vim/bundle/fugitive
 
-"flake8
-"pip install flake8
-"git clone https://github.com/nvie/vim-flake8.git .vim/bundle/vim-flake8
-autocmd FileType python map <buffer> <leader>f :call flake8#Flake8()<CR>
+"ALE
+"git clone https://github.com/dense-analysis/ale ~/.vim/bundle/ale
+"python3.11 -m pip install pylint
+"python3.11 -m pip install pylint-pydantic
+"python3.11 -m pip install pylint-report
+"install python-lsp-server, check dependecies
+"python3.11 -m pip install "python-lsp-server[rope]"
+"python3.11 -m pip install jedi==0.19.1
+"python3.11 -m pip install 'parso>=0.8'
+call ale#Set('python_flake8_options', '--config=$HOME/flake8')
+let g:ale_linters = {'python': ['flake8', 'pylint', 'pylsp']}
+let g:ale_linters_explicit = 1
+let g:ale_completion_enabled = 1
+let g:ale_virtualenv_dir_names = ['.venv', 'env', 've', 'venv', 'virtualenv', '.env']
+"arirline ALE support
+let g:airline#extensions#ale#enabled = 1
+"ALE hover settings
+set updatetime=500            "user doesn't press a key for the time - hover start work
+"ALE key mapings
+nnoremap <leader>d :ALEGoToDefinition -vsplit<CR>
+nnoremap <leader>dt :ALEGoToDefinition -tab<CR>
+nnoremap <leader>t :ALEGoToTypeDefinition -split<CR>
+nnoremap <leader>i :ALEGoToImplementation -vsplit<CR>
+nnoremap <leader>f :ALEFindReferences -relative<CR>
+nnoremap <leader>h :ALEHover<CR>
 
+"flake8
+"git clone https://github.com/nvie/vim-flake8.git .vim/bundle/vim-flake8
+"autocmd FileType python map <buffer> <leader>8 :call flake8#Flake8()<CR>
+
+"pylint
+"python3.11 -m pip install pylint
+
+"my-py
+"git clone https://github.com/integralist/vim-mypy ~/.vim/bundle/vim-mypy
 
 "gVIM
 "COLORSCHEME, FONTS
@@ -124,14 +154,14 @@ autocmd FileType python map <buffer> <leader>f :call flake8#Flake8()<CR>
 if has('gui_running')
     "colorsheme
     colorscheme solarized
-    set background=dark
+    set background=light
     let g:solarized_contrast="high" | colorscheme solarized
     let g:solarized_visibility="high" | colorscheme solarized
     let g:solarized_diffmode="high" | colorscheme solarized
     nnoremap sbd :set background=dark<CR>
     nnoremap sbl :set background=light<CR>
     if has("gui_gtk3")
-      set guifont=Inconsolata\ 10
+      set guifont=Inconsolata\ 11
     elseif has("gui_win32")
       set guifont=Consolas:h11
     "elseif has("gui_macvim")
