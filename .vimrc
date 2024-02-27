@@ -5,7 +5,6 @@ endif
 
 "GENERAL
 set nocompatible               "Use Vim defaults (much better!)
-syntax on
 set viminfo='20,\"50           "read/write a .viminfo file, don't store more
                                "than 50 lines of registers
 set history=50                 "keep 50 lines of command line history
@@ -17,6 +16,12 @@ filetype on
 filetype plugin on
 set bs=indent,eol,start        "allow backspacing over everything in insert mode
 filetype indent on             "load filetype-specific indent files
+set number
+
+
+"SYNTAX
+syntax on
+au BufReadPost *.ci set syntax=groovy
 
 
 "don't wake up system with blinking cursor:
@@ -115,20 +120,28 @@ let g:airline#extensions#tabline#formatter = 'default'
 
 "ALE
 "git clone https://github.com/dense-analysis/ale ~/.vim/bundle/ale
+"python3.11 -m pip install flake8
 "python3.11 -m pip install pylint
 "python3.11 -m pip install pylint-pydantic
 "python3.11 -m pip install pylint-report
+"python3.11 -m pip install mypy
 "install python-lsp-server, check dependecies
 "python3.11 -m pip install "python-lsp-server[rope]"
 "python3.11 -m pip install jedi==0.19.1
 "python3.11 -m pip install 'parso>=0.8'
-call ale#Set('python_flake8_options', '--config=$HOME/flake8')
-let g:ale_linters = {'python': ['flake8', 'pylint', 'pylsp']}
+let g:ale_linters = {'python': ['flake8', 'pylint', 'mypy', 'pylsp'], 'go': ['govet', 'gopls']}
 let g:ale_linters_explicit = 1
 let g:ale_completion_enabled = 1
 let g:ale_virtualenv_dir_names = ['.venv', 'env', 've', 'venv', 'virtualenv', '.env']
-"arirline ALE support
+"ALE arirline support
 let g:airline#extensions#ale#enabled = 1
+"ALE flake8 configuration
+call ale#Set('python_flake8_options', '--config=$HOME/.flake8')
+"ALE mypy configuration
+let g:ale_python_mypy_ignore_invalid_syntax = 1
+let g:ale_python_mypy_options = '--config-file ~/.mypy.ini'
+"ALE GO configuration
+let g:ale_go_go111module = 'off'
 "ALE hover settings
 set updatetime=500            "user doesn't press a key for the time - hover start work
 "ALE key mapings
@@ -138,16 +151,6 @@ nnoremap <leader>t :ALEGoToTypeDefinition -split<CR>
 nnoremap <leader>i :ALEGoToImplementation -vsplit<CR>
 nnoremap <leader>f :ALEFindReferences -relative<CR>
 nnoremap <leader>h :ALEHover<CR>
-
-"flake8
-"git clone https://github.com/nvie/vim-flake8.git .vim/bundle/vim-flake8
-"autocmd FileType python map <buffer> <leader>8 :call flake8#Flake8()<CR>
-
-"pylint
-"python3.11 -m pip install pylint
-
-"my-py
-"git clone https://github.com/integralist/vim-mypy ~/.vim/bundle/vim-mypy
 
 "gVIM
 "COLORSCHEME, FONTS

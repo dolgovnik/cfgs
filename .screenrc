@@ -1,0 +1,12 @@
+# Disable startup message
+startup_message off
+# Enable utf8
+defutf8 on
+# Screen blinking instead of beeper
+vbell on
+# Scrollback buffer
+defscrollback 10000
+# Detach if terminal connection droppped
+autodetach on
+# Terminal scrololing enabled
+termcapinfo xterm* ti@:te@

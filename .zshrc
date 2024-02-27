@@ -38,15 +38,20 @@ PROMPT=$'%F{green}%B[%*]%b%f %F{blue}%~%f ${vcs_info_msg_0_}\n${SCREEN_WINDOW}%(
 
 # Variables
 typeset -U path PATH
-path=(/sbin /bin /usr/sbin /usr/bin /usr/local/sbin /usr/local/bin /home/nikolay/.local/bin $path)
+path=(/sbin /bin /usr/sbin /usr/bin /usr/local/sbin /usr/local/bin /home/nikolay/.local/bin /usr/local/go/bin $path)
 export PATH
+
+# WORDCHARS to split words by '/'
+# WORDCHARS=$'*?_-.[]~=/&;!#$%^(){}<>'
+WORDCHARS=$'*?_-.[]~=&;!#$%^(){}<>'
 
 # Aliases
 alias mv="mv -vi"
 alias cp="cp -vi"
 alias rm="rm -v"
 alias grep="grep -nsi --color"
-alias h="history 300"
+alias h="history -300"
+alias ha="history 0"
 alias ll="ls -la --color=auto"
 alias p="pwd"
 alias sd="sudo"
