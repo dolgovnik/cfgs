@@ -129,7 +129,8 @@ let g:airline#extensions#tabline#formatter = 'default'
 "python3.11 -m pip install "python-lsp-server[rope]"
 "python3.11 -m pip install jedi==0.19.1
 "python3.11 -m pip install 'parso>=0.8'
-let g:ale_linters = {'python': ['flake8', 'pylint', 'mypy', 'pylsp'], 'go': ['govet', 'gopls']}
+"let g:ale_linters = {'python': ['flake8', 'pylint', 'mypy', 'pylsp'], 'go': ['govet', 'gopls']}
+let g:ale_linters = {'python': ['flake8', 'pylint', 'mypy', 'pylsp'], 'go': ['gopls']}
 let g:ale_linters_explicit = 1
 let g:ale_completion_enabled = 1
 let g:ale_virtualenv_dir_names = ['.venv', 'env', 've', 'venv', 'virtualenv', '.env']
@@ -141,7 +142,7 @@ call ale#Set('python_flake8_options', '--config=$HOME/.flake8')
 let g:ale_python_mypy_ignore_invalid_syntax = 1
 let g:ale_python_mypy_options = '--config-file ~/.mypy.ini'
 "ALE GO configuration
-let g:ale_go_go111module = 'off'
+"let g:ale_go_go111module = 'off'
 "ALE hover settings
 set updatetime=500            "user doesn't press a key for the time - hover start work
 "ALE key mapings
