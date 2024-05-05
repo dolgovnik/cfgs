@@ -155,16 +155,18 @@ nnoremap <leader>h :ALEHover<CR>
 
 "gVIM
 "COLORSCHEME, FONTS
-"git clone https://github.com/altercation/vim-colors-solarized.git ~/.vim/bundle/vim-colors-solarized
+"git clone https://github.com/flazz/vim-colorschemes.git ~/.vim/bundle/colorschemes
+"git clone https://github.com/xolox/vim-colorscheme-switcher ~/.vim/bundle/colorschemes-switcher
+"git clone https://github.com/xolox/vim-misc ~/.vim/bundle/vim-misc
+nnoremap <leader>c :colorscheme<CR>
+nnoremap <leader>cc :colorscheme 
+nnoremap <leader>bl :set background=light<CR>
+nnoremap <leader>bd :set background=dark<CR>
+
 if has('gui_running')
     "colorsheme
-    colorscheme solarized
-    set background=light
-    let g:solarized_contrast="high" | colorscheme solarized
-    let g:solarized_visibility="high" | colorscheme solarized
-    let g:solarized_diffmode="high" | colorscheme solarized
-    nnoremap sbd :set background=dark<CR>
-    nnoremap sbl :set background=light<CR>
+    colorscheme gruvbox
+    set background=dark
     if has("gui_gtk3")
       set guifont=Inconsolata\ 11
     elseif has("gui_win32")
