@@ -153,6 +153,38 @@ nnoremap <leader>i :ALEGoToImplementation -vsplit<CR>
 nnoremap <leader>f :ALEFindReferences -relative<CR>
 nnoremap <leader>h :ALEHover<CR>
 
+"vimwiki
+"git clone https://github.com/vimwiki/vimwiki.git
+"vimwiki help
+"vim -c 'helptags ~/.vim/bundle/vimwiki/doc/' -c quit
+
+let wiki_1 = {}
+let wiki_1.name = 'Work'
+let wiki_1.path = '~/wiki/work/'
+let wiki_1.path_html = '~/wiki/work/html/'
+let wiki_1.syntax = 'markdown'
+let wiki_1.ext = '.md'
+
+let wiki_2 = {}
+let wiki_2.name = 'Study'
+let wiki_2.path = '~/wiki/study/'
+let wiki_2.path_html = '~/wiki/study/html/'
+let wiki_2.syntax = 'markdown'
+let wiki_2.ext = '.md'
+
+let wiki_3 = {}
+let wiki_3.name = 'Personal'
+let wiki_3.path = '~/wiki/personal/'
+let wiki_3.path_html = '~/wiki/personal/html/'
+let wiki_3.syntax = 'markdown'
+let wiki_3.ext = '.md'
+
+let g:vimwiki_ext2syntax = {'.md': 'markdown'}
+
+let g:vimwiki_list = [wiki_1, wiki_2, wiki_3]
+
+nnoremap <Leader>vs :VimwikiVSplitLink<CR>
+
 "gVIM
 "COLORSCHEME, FONTS
 "git clone https://github.com/flazz/vim-colorschemes.git ~/.vim/bundle/colorschemes
