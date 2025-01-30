@@ -7,7 +7,6 @@ endif
 set nocompatible               "Use Vim defaults (much better!)
 set viminfo='20,\"50           "read/write a .viminfo file, don't store more
                                "than 50 lines of registers
-set history=50                 "keep 50 lines of command line history
 set showcmd                    "show command in bottom bar
 set wildmenu                   "visual autocomplete for command menu
 set lazyredraw                 "redraw only when we need to.
@@ -15,7 +14,7 @@ set autochdir                  "auto change workdir to current opened file
 filetype on
 filetype plugin on
 set bs=indent,eol,start        "allow backspacing over everything in insert mode
-filetype indent on             "load filetype-specific indent files
+"filetype indent on             "load filetype-specific indent files
 set number
 
 
@@ -23,12 +22,18 @@ set number
 syntax on
 au BufReadPost *.ci set syntax=groovy
 
+"decimal number format
+set nrformats=
 
 "don't wake up system with blinking cursor:
 let &guicursor = &guicursor . ",a:blinkon0"
 
 "set ai                        "always set autoindenting on
 
+"COMMAND HISTORY
+set history=50                 "keep 50 lines of command line history
+cnoremap <C-p> <Up>
+cnoremap <C-n> <Down>
 
 "BACKUP
 "delete old backup, backup current file
@@ -85,10 +90,12 @@ nnoremap snn :set nonumber<CR>
 "curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 execute pathogen#infect()
 
+
 "undotree
 "git clone https://github.com/mbbill/undotree.git ~/.vim/bundle/undotree
 "toggle undotree
 nnoremap <leader>u :UndotreeToggle<CR>
+
 
 "nerdtree
 "git clone https://github.com/preservim/nerdtree.git ~/.vim/bundle/nerdtree
@@ -96,15 +103,18 @@ nnoremap <leader>n :NERDTreeFocus<CR>
 nnoremap <C-n> :NERDTree<CR>
 nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
-" set ambiwidth=double  "to not slice dev_icons in nerdtee
+"set ambiwidth=double  "to not slice dev_icons in nerdtee
+
 
 "vim-nerdtree-syntax-highlight
 "git clone https://github.com/tiagofumo/vim-nerdtree-syntax-highlight ~/.vim/bundle/vim-nerdtree-syntax-highlight
+
 
 "dev-icons
 "git clone https://github.com/ryanoasis/vim-devicons ~/.vim/bundle/vim-devicons
 "put needed font (All Ubuntu Fonts) from https://github.com/ryanoasis/nerd-fonts to
 "~/.local/share/fonts
+
 
 "airline
 "git clone https://github.com/vim-airline/vim-airline ~/.vim/bundle/vim-airline
@@ -115,11 +125,20 @@ let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'default'
 
+
+"preview-uml
+"git clone https://github.com/skanehira/preview-uml.vim ~/.vim/bundle/preview-uml
+"docker run -d -p 8888:8080 plantuml/plantuml-server:jetty
+let g:preview_uml_url='http://localhost:8888'
+
+
 "fugitive
 "git clone https://tpope.io/vim/fugitive.git ~/.vim/bundle/fugitive
 
+
 "ALE
 "git clone https://github.com/dense-analysis/ale ~/.vim/bundle/ale
+"ALE: Python libs installation
 "python3.11 -m pip install flake8
 "python3.11 -m pip install pylint
 "python3.11 -m pip install pylint-pydantic
@@ -129,35 +148,62 @@ let g:airline#extensions#tabline#formatter = 'default'
 "python3.11 -m pip install "python-lsp-server[rope]"
 "python3.11 -m pip install jedi==0.19.1
 "python3.11 -m pip install 'parso>=0.8'
-"let g:ale_linters = {'python': ['flake8', 'pylint', 'mypy', 'pylsp'], 'go': ['govet', 'gopls']}
+"ALE: Go libs installation
+"go get golang.org/x/tools/gopls@latest
+"ALE: linters
 let g:ale_linters = {'python': ['flake8', 'pylint', 'mypy', 'pylsp'], 'go': ['gopls']}
 let g:ale_linters_explicit = 1
 let g:ale_completion_enabled = 1
 let g:ale_virtualenv_dir_names = ['.venv', 'env', 've', 'venv', 'virtualenv', '.env']
-"ALE arirline support
+"ALE: message formats
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_format = '[%linter%][%severity%] %s'
+let g:ale_virtualtext_prefix = '%comment% [%linter%][%severity%] '
+let g:ale_sign_error = '>>'
+let g:ale_sign_warning = '--'
+"ALE: function to change ALE colours
+function! ALEColours() abort
+	highlight link ALEVirtualTextError Error
+"    highlight link ALEVirtualTextWarning Warning
+    highlight ALEVirtualTextWarning guibg=yellow guifg=black ctermbg=yellow ctermfg=black
+"	highlight link ALEVirtualTextInfo Info
+	highlight ALEVirtualTextInfo guibg=green guifg=black ctermbg=green ctermfg=black
+endfunction
+"ALE:use ALE colours in any GUI colouscheme
+augroup MyALEColors
+    autocmd!
+    autocmd ColorScheme * call ALEColours()
+augroup END
+"ALE: arirline support
 let g:airline#extensions#ale#enabled = 1
-"ALE flake8 configuration
+"ALE: Python configuration
+"ALE: flake8 configuration
 call ale#Set('python_flake8_options', '--config=$HOME/.flake8')
-"ALE mypy configuration
+"ALE: pylsp configuration
+let g:ale_python_pylsp_config = {'pylsp':{'plugins':{'pycodestyle':{'enabled': v:false}}}}
+"ALE: mypy configuration
 let g:ale_python_mypy_ignore_invalid_syntax = 1
-let g:ale_python_mypy_options = '--config-file ~/.mypy.ini'
-"ALE GO configuration
+let g:ale_python_mypy_options = '--config-file $HOME/.mypy.ini'
+"ALE: GO configuration
 "let g:ale_go_go111module = 'off'
-"ALE hover settings
+"ALE: hover settings
 set updatetime=500            "user doesn't press a key for the time - hover start work
-"ALE key mapings
+"ALE: key mapings
 nnoremap <leader>d :ALEGoToDefinition -vsplit<CR>
 nnoremap <leader>dt :ALEGoToDefinition -tab<CR>
-nnoremap <leader>t :ALEGoToTypeDefinition -split<CR>
+nnoremap <leader>t :ALEGoToTypeDefinition -vsplit<CR>
+nnoremap <leader>tt :ALEGoToTypeDefinition -tab<CR>
 nnoremap <leader>i :ALEGoToImplementation -vsplit<CR>
+nnoremap <leader>it :ALEGoToImplementation -tab<CR>
 nnoremap <leader>f :ALEFindReferences -relative<CR>
 nnoremap <leader>h :ALEHover<CR>
+
 
 "vimwiki
 "git clone https://github.com/vimwiki/vimwiki.git
 "vimwiki help
 "vim -c 'helptags ~/.vim/bundle/vimwiki/doc/' -c quit
-
 let wiki_1 = {}
 let wiki_1.name = 'Work'
 let wiki_1.path = '~/wiki/work/'
@@ -185,6 +231,7 @@ let g:vimwiki_list = [wiki_1, wiki_2, wiki_3]
 
 nnoremap <Leader>vs :VimwikiVSplitLink<CR>
 
+
 "gVIM
 "COLORSCHEME, FONTS
 "git clone https://github.com/flazz/vim-colorschemes.git ~/.vim/bundle/colorschemes
@@ -197,8 +244,8 @@ nnoremap <leader>bd :set background=dark<CR>
 
 if has('gui_running')
     "colorsheme
-    colorscheme gruvbox
-    set background=dark
+    colorscheme PaperColor
+    set background=light
     if has("gui_gtk3")
       set guifont=Inconsolata\ 11
     elseif has("gui_win32")
@@ -206,4 +253,8 @@ if has('gui_running')
     "elseif has("gui_macvim")
     "  set guifont=Menlo\ Regular:h14
     endif
+else
+    "ALE: use ALE colours in any Termiinal
+	call ALEColours()
+    colorscheme PaperColor
 endif
