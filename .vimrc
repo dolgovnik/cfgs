@@ -17,10 +17,16 @@ set bs=indent,eol,start        "allow backspacing over everything in insert mode
 "filetype indent on             "load filetype-specific indent files
 set number
 
-
 "SYNTAX
 syntax on
 au BufReadPost *.ci set syntax=groovy
+
+"FOLDING
+"all folds are open by default
+set foldlevel=99
+"folding file types
+autocmd FileType go setlocal foldmethod=syntax
+autocmd FileType python setlocal foldmethod=syntax
 
 "decimal number format
 set nrformats=
@@ -103,6 +109,8 @@ nnoremap <leader>n :NERDTreeFocus<CR>
 nnoremap <C-n> :NERDTree<CR>
 nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
+let g:NERDTreeShowLineNumbers=1
+let g:NERDTreeWinSize=50
 "set ambiwidth=double  "to not slice dev_icons in nerdtee
 
 
@@ -186,6 +194,8 @@ let g:ale_python_pylsp_config = {'pylsp':{'plugins':{'pycodestyle':{'enabled': v
 let g:ale_python_mypy_ignore_invalid_syntax = 1
 let g:ale_python_mypy_options = '--config-file $HOME/.mypy.ini'
 "ALE: GO configuration
+let g:ale_go_gopls_init_options = {'buildFlags': ["-tags=ybts"]}
+"let g:ale_go_gopls_init_options = {'buildFlags': ["-tags=ybsc"]}
 "let g:ale_go_go111module = 'off'
 "ALE: hover settings
 set updatetime=500            "user doesn't press a key for the time - hover start work
@@ -198,6 +208,7 @@ nnoremap <leader>i :ALEGoToImplementation -vsplit<CR>
 nnoremap <leader>it :ALEGoToImplementation -tab<CR>
 nnoremap <leader>f :ALEFindReferences -relative<CR>
 nnoremap <leader>h :ALEHover<CR>
+nnoremap <leader>s :ALESymbolSearch 
 
 
 "vimwiki

@@ -6,6 +6,7 @@ editor = vim
 [alias]
 ad = add
 co = checkout
+sw = switch
 br = branch
 ci = commit
 cim = commit -m
